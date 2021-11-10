@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 const { db } = require('./models/db');
+const ExpressError = require('./utils/ExpressError');
 
 const app = express();
 
@@ -36,12 +37,14 @@ db.authenticate()
 
 // routers
 const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 app.get('/', (req, res) => {
   res.send('Homepage');
 });
 
 app.use(authRoutes);
+app.use(userRoutes);
 
 // generic 404 for unused routes
 app.use((req, res, next) => {

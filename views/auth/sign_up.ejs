@@ -47,6 +47,9 @@
 
           console.log(data)
 
+          if (data.success) {
+            window.location.assign('/user/profile')
+          }
           if (data.name) {
             document.querySelector('.error--name').textContent = data.name
           }
