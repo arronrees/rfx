@@ -23,7 +23,6 @@ app.use(cookieParser());
 app.use(morgan('tiny'));
 
 // db connection
-
 db.authenticate()
   .then(() => {
     console.log('DB Connected');
@@ -44,7 +43,7 @@ const userRoutes = require('./routes/userRoutes');
 app.get('*', updateLoginStatus);
 
 app.get('/', (req, res) => {
-  res.send('Homepage');
+  res.render('home.ejs');
 });
 
 // use routes
