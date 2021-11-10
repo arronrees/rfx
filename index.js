@@ -6,6 +6,8 @@ const path = require('path');
 const { db } = require('./models/db');
 const ExpressError = require('./utils/ExpressError');
 
+const { updateLoginStatus } = require('./middleware/authMiddleware');
+
 const app = express();
 
 // register view engine
@@ -39,10 +41,13 @@ db.authenticate()
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 
+app.get('*', updateLoginStatus);
+
 app.get('/', (req, res) => {
   res.send('Homepage');
 });
 
+// use routes
 app.use(authRoutes);
 app.use(userRoutes);
 
