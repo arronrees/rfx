@@ -2,19 +2,64 @@
 
   <%- include('../partials/header'); -%>
 
-    <form action="/auth/sign-up" method="POST">
+    <form class="sign__up">
       <div class="row">
         <label for="name">Name</label>
         <input type="text" name="name" id="name">
+        <div class="error error--name"></div>
       </div>
       <div class="row">
         <label for="email">Email</label>
         <input type="email" name="email" id="email">
+        <div class="error error--email"></div>
       </div>
       <div class="row">
         <label for="password">Password</label>
         <input type="password" name="password" id="password">
+        <div class="error error--password"></div>
+      </div>
+      <div class="row">
+        <button type="submit">Sign Up</button>
       </div>
     </form>
 
+    <script>
+      const form = document.querySelector('.sign__up');
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const user = {
+          name: form.name.value,
+          email: form.email.value,
+          password: form.password.value,
+        }
+
+        async function sendData() {
+
+          const res = await fetch('/auth/sign-up', {
+            method: 'POST',
+            body: JSON.stringify(user),
+            headers: { 'Content-Type': 'application/json' }
+          });
+
+          const data = await res.json();
+
+          console.log(data)
+
+          if (data.name) {
+            document.querySelector('.error--name').textContent = data.name
+          }
+          if (data.email) {
+            document.querySelector('.error--email').textContent = data.email
+          }
+          if (data.password) {
+            document.querySelector('.error--password').textContent = data.password
+          }
+
+        }
+
+        sendData()
+      })
+    </script>
     <%- include('../partials/footer'); -%>
