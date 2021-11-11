@@ -3,12 +3,27 @@ const express = require('express');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const path = require('path');
+const fs = require('fs');
 const { db } = require('./models/db');
 const ExpressError = require('./utils/ExpressError');
 
 const { updateLoginStatus } = require('./middleware/authMiddleware');
 
 const app = express();
+
+const csvParser = require('csv-parser');
+// parse csv to array of objects, csv needs to have no spaces
+let csvOutput = [];
+fs.createReadStream('./upload-csv/rfx.csv')
+  .pipe(csvParser())
+  .on('data', (data) => csvOutput.push(data))
+  .on('end', () => {
+    console.log('csv parse complete');
+  });
+
+app.get('/csv-data', (req, res) => {
+  res.json(csvOutput);
+});
 
 // register view engine
 app.set('view engine', 'ejs');
