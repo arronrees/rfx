@@ -6,7 +6,9 @@ const path = require('path');
 const fs = require('fs');
 const { db } = require('./models/db');
 const ExpressError = require('./utils/ExpressError');
+const catchAsync = require('./utils/catchAsync');
 
+const { pageTemplate } = require('./utils/pageTemplate');
 const { updateLoginStatus } = require('./middleware/authMiddleware');
 
 const app = express();
@@ -54,14 +56,13 @@ db.authenticate()
 // routers
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
+const pagesRoutes = require('./routes/pagesRoutes');
 
 app.get('*', updateLoginStatus);
-
-app.get('/', (req, res) => {
-  res.render('home.ejs');
-});
+app.get('*', catchAsync(pageTemplate));
 
 // use routes
+app.use(pagesRoutes);
 app.use(authRoutes);
 app.use(userRoutes);
 

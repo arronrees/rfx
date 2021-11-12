@@ -27,15 +27,13 @@
       </div>
       <nav class="navbar">
         <ul class="nav__menu">
-          <li class="nav__item"><a href="#">Home</a></li>
-          <li class="nav__item"><a href="#">About</a></li>
-          <li class="nav__item"><a href="#">RFX Products</a></li>
-          <li class="nav__item"><a href="#">Quality</a></li>
-          <li class="nav__item"><a href="#">Library</a></li>
-          <li class="nav__item"><a href="#">News</a></li>
-          <li class="nav__item"><a href="#">Distributors</a></li>
-          <li class="nav__item"><a href="#">Careers</a></li>
-          <li class="nav__item"><a href="#">Contact</a></li>
+          <% template.nav.forEach(item=> { %>
+            <li class="nav__item">
+              <a href="/<%=item.URL%>">
+                <%=item.Title%>
+              </a>
+            </li>
+            <% }) %>
         </ul>
         <div class="search">
           What Are you Looking for?

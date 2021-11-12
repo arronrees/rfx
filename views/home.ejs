@@ -8,52 +8,35 @@
         <div class="splide hero__splide">
           <div class="splide__track">
             <ul class="splide__list">
-              <li class="splide__slide">
-                <div class="wrapper">
-                  <div class="slide__content">
-                    <h3>Quality engineering <span>and manufacturing</span></h3>
-                    <p>The company design and manufacures innovative standard and bespoke high frequency preciesion
-                      OCXO,
-                      TCXO, VCXO and PLL oscillators</p>
-                    <div class="btns">
-                      <a href="#" class="btn">
-                        RFX Products
-                      </a>
-                      <a href="#" class="btn">
-                        Quality
-                      </a>
+              <% heroSliders.forEach(slider=> { %>
+                <li class="splide__slide">
+                  <div class="wrapper">
+                    <div class="slide__content">
+                      <h3>
+                        <%= slider.Headline1 %> <span>
+                            <%= slider.Headline2 %>
+                          </span>
+                      </h3>
+                      <p>
+                        <%= slider.Description %>
+                      </p>
+                      <div class="btns">
+                        <a href="<%= slider.Button1Link %>" class="btn">
+                          <%= slider.Button1Text %>
+                        </a>
+                        <a href="<%= slider.Button2Link %>" class="btn">
+                          <%= slider.Button2Text %>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="slide__img">
+                      <figure>
+                        <img src="http://localhost:1337<%=slider.Image.url %>" alt="#">
+                      </figure>
                     </div>
                   </div>
-                  <div class="slide__img">
-                    <figure>
-                      <img src="/img/main.png" alt="#">
-                    </figure>
-                  </div>
-                </div>
-              </li>
-              <li class="splide__slide">
-                <div class="wrapper">
-                  <div class="slide__content">
-                    <h3>Quality engineering <span>and manufacturing</span></h3>
-                    <p>The company design and manufacures innovative standard and bespoke high frequency preciesion
-                      OCXO,
-                      TCXO, VCXO and PLL oscillators</p>
-                    <div class="btns">
-                      <a href="#" class="btn">
-                        RFX Products
-                      </a>
-                      <a href="#" class="btn">
-                        Quality
-                      </a>
-                    </div>
-                  </div>
-                  <div class="slide__img">
-                    <figure>
-                      <img src="/img/main.png" alt="#">
-                    </figure>
-                  </div>
-                </div>
-              </li>
+                </li>
+                <% }) %>
             </ul>
           </div>
           <div class="splide__arrows">
@@ -80,31 +63,40 @@
       <!-- home cta -->
       <section class="home__cta">
         <div class="text">
-          <p>Latest News: RFX launches new ultra-low noise OCXO</p>
-          <p>RFX has announced the release of its new high performance OS36-10 seriers Oven Controlled Crystal
-            Oscillator
-            (OCXO)...</p>
+          <p>
+            <%= pageLayout.cta.Headline %>
+          </p>
+          <p>
+            <%= pageLayout.cta.SecondLine %>
+          </p>
         </div>
-        <a href="#" class="cta__btn btn">Read More</a>
+        <a href="<%= pageLayout.cta.ButtonLink %>" class="cta__btn btn">
+          <%= pageLayout.cta.ButtonText %>
+        </a>
       </section>
       <!-- --home cta -->
       <!-- home intro -->
       <section class="home__intro">
         <div class="img">
           <figure>
-            <img src="./img/other.jpg" alt="#">
+            <img src="http://localhost:1337<%= pageLayout.introBlock.Image.url %>"
+              alt="<%= pageLayout.introBlock.Headline %>">
           </figure>
         </div>
         <div class="content">
-          <h2>A specialist frequency product manufacurer</h2>
-          <p>The company designs and manufactures innovative standard
-            and bespoke high frequency precision OCXO, TCXO, VCXO
-            and PLL oscillators from 1MHz to 2.4GHz and GPS synchronised
-            precision OCXO modules from its modern production unit
-            based in Livingston, Scotland. Our quartz crystal division.</p>
+          <h2>
+            <%= pageLayout.introBlock.Headline %>
+          </h2>
+          <p>
+            <%= pageLayout.introBlock.Description %>
+          </p>
           <div class="btns">
-            <a href="#" class="btn">About Us</a>
-            <a href="#" class="btn">Laptech</a>
+            <a href="<%= pageLayout.introBlock.Button1Link %>" class="btn">
+              <%= pageLayout.introBlock.Button1Text %>
+            </a>
+            <a href="<%= pageLayout.introBlock.Button2Link %>" class="btn">
+              <%= pageLayout.introBlock.Button2Text %>
+            </a>
           </div>
         </div>
       </section>
@@ -120,56 +112,35 @@
           <div class="splide blog__splide">
             <div class="splide__track">
               <ul class="splide__list">
-                <li class="splide__slide">
-                  <div class="content">
-                    <p class="date">
-                      September 2021
-                    </p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit nostrum saepe tenetur tempore
-                      dolor illo
-                      numquam maiores labore dolorem repudiandae eveniet ut ea culpa aperiam neque, dicta error laborum
-                      dolores
-                      eos earum accusantium minima officia asperiores. Doloremque ad nihil facere aliquam veritatis
-                      impedit iure
-                      eos dolores, asperiores, eum rem aut.</p>
-                    <div class="btn">Read More</div>
-                  </div>
-                </li>
-                <li class="splide__slide">
-                  <div class="content">
-                    <p class="date">
-                      September 2021
-                    </p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit nostrum saepe tenetur tempore
-                      dolor illo
-                      numquam maiores labore dolorem repudiandae eveniet ut ea culpa aperiam neque, dicta error laborum
-                      dolores
-                      eos earum accusantium minima officia asperiores. Doloremque ad nihil facere aliquam veritatis
-                      impedit iure
-                      eos dolores, asperiores, eum rem aut.</p>
-                    <div class="btn">Read More</div>
-                  </div>
-                </li>
+                <% blogs.forEach(blog=> { %>
+                  <li class="splide__slide">
+                    <div class="content">
+                      <p class="date">
+                        <%=blog.Date%>
+                      </p>
+                      <p>
+                        <%=blog.Description%>
+                      </p>
+                      <div class="btn">Read More</div>
+                    </div>
+                  </li>
+                  <% }); %>
               </ul>
             </div>
           </div>
         </div>
         <div class="news">
-          <a href="#" class="item">
-            <p class="date">September 2021</p>
-            <h4>RFX Ltd announce version two of their GPS disciplined OCXO module. </h4>
-            <div class="btn">Read More</div>
-          </a>
-          <a href="#" class="item">
-            <p class="date">September 2021</p>
-            <h4>RFX Ltd announce version two of their GPS disciplined OCXO module. </h4>
-            <div class="btn">Read More</div>
-          </a>
-          <a href="#" class="item">
-            <p class="date">September 2021</p>
-            <h4>RFX Ltd announce version two of their GPS disciplined OCXO module. </h4>
-            <div class="btn">Read More</div>
-          </a>
+          <% news.forEach(post=> { %>
+            <a href="#" class="item">
+              <p class="date">
+                <%= post.Date %>
+              </p>
+              <h4>
+                <%= post.Headline %>
+              </h4>
+              <div class="btn">Read More</div>
+            </a>
+            <% }) %>
         </div>
       </section>
       <!-- --home updates -->
@@ -289,15 +260,25 @@
       </section>
       <!-- --product grid -->
       <!-- footer info -->
-      <section class="info__block">
+      <section class="info__block"
+        style="background-image: url(http://localhost:1337<%=pageLayout.infoBlock.Image.url%>);">
         <div class="overlay"></div>
         <div class="content">
-          <h4>Experienced Lapping and <span>Polishing services</span></h4>
-          <p>Precision lapping and polishing of materials including quartz,metals and
-            alloys, correction of alumina plates, aluminium oxide and silicon carbide.</p>
+          <h4>
+            <%= pageLayout.infoBlock.Heading1 %> <span>
+                <%= pageLayout.infoBlock.Heading2 %>
+              </span>
+          </h4>
+          <p>
+            <%= pageLayout.infoBlock.Text %>
+          </p>
           <div class="btns">
-            <a href="#" class="btn">Lapping</a>
-            <a href="#" class="btn">Polishing</a>
+            <a href="<%= pageLayout.infoBlock.Button1Link %>" class="btn">
+              <%= pageLayout.infoBlock.Button1Text %>
+            </a>
+            <a href="<%= pageLayout.infoBlock.Button2Link %>" class="btn">
+              <%= pageLayout.infoBlock.Button2Text %>
+            </a>
           </div>
         </div>
       </section>
