@@ -1390,7 +1390,7 @@ img {
 }
 
 .table__block .table {
-  --columns: 9;
+  --columns: 10;
 }
 
 .table__block .table .header {
@@ -1414,12 +1414,14 @@ img {
   display: grid;
   -ms-grid-columns: (1fr)[var];
       grid-template-columns: repeat(var(--columns), 1fr);
+  font-size: 0.8rem;
+  text-align: center;
+  border-bottom: 1px solid #fff;
 }
 
 .table__block .table .row .expanded__row {
   background-color: var(--light-blue);
   grid-column: span var(--columns)/auto;
-  border-bottom: 1px solid var(--mid-grey);
   display: none;
 }
 

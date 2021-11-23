@@ -60,3 +60,10 @@ module.exports.getHomePage = async (req, res) => {
     news,
   });
 };
+
+// products ---
+
+// clock oscillators
+module.exports.getClockOscillators = async (req, res) => {
+  res.render('products/clock.ejs');
+};

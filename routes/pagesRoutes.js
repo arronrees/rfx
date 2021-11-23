@@ -9,4 +9,9 @@ router.get('/home', (req, res) => {
   res.redirect('/');
 });
 
+router.get(
+  '/clock-osciallators',
+  catchAsync(pagesController.getClockOscillators)
+);
+
 module.exports = router;

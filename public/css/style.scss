@@ -1372,7 +1372,7 @@ img {
   }
 
   .table {
-    --columns: 9;
+    --columns: 10;
 
     .header {
       padding: 0;
@@ -1391,11 +1391,13 @@ img {
     .row {
       display: grid;
       grid-template-columns: repeat(var(--columns), 1fr);
+      font-size: 0.8rem;
+      text-align: center;
+      border-bottom: 1px solid #fff;
 
       .expanded__row {
         background-color: var(--light-blue);
         grid-column: span var(--columns) / auto;
-        border-bottom: 1px solid var(--mid-grey);
         display: none;
 
         > div {
