@@ -29,8 +29,6 @@ module.exports.getHomePage = async (req, res) => {
     }
   });
 
-  console.log(pageLayout);
-
   const blogData = await axios.get(`${process.env.ADMIN_URL}/blogs`);
   const blogs = [];
 

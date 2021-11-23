@@ -3,29 +3,15 @@ const express = require('express');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const path = require('path');
-const fs = require('fs');
 const { db } = require('./models/db');
 const ExpressError = require('./utils/ExpressError');
 const catchAsync = require('./utils/catchAsync');
+const cors = require('cors');
 
 const { pageTemplate } = require('./utils/pageTemplate');
 const { updateLoginStatus } = require('./middleware/authMiddleware');
 
 const app = express();
-
-const csvParser = require('csv-parser');
-// parse csv to array of objects, csv needs to have no spaces
-let csvOutput = [];
-fs.createReadStream('./upload-csv/rfx.csv')
-  .pipe(csvParser())
-  .on('data', (data) => csvOutput.push(data))
-  .on('end', () => {
-    console.log('csv parse complete');
-  });
-
-app.get('/csv-data', (req, res) => {
-  res.json(csvOutput);
-});
 
 // register view engine
 app.set('view engine', 'ejs');
@@ -38,6 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(morgan('tiny'));
+app.use(cors());
 
 // db connection
 db.authenticate()
@@ -57,11 +44,13 @@ db.authenticate()
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const pagesRoutes = require('./routes/pagesRoutes');
+const apiRoutes = require('./routes/apiRoutes');
 
 app.get('*', updateLoginStatus);
 app.get('*', catchAsync(pageTemplate));
 
 // use routes
+app.use(apiRoutes);
 app.use(pagesRoutes);
 app.use(authRoutes);
 app.use(userRoutes);

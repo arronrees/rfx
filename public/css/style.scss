@@ -1286,7 +1286,7 @@ img {
 
 // table
 .table__block {
-  max-width: 1440px;
+  max-width: 1800px;
   margin: 0 auto;
   padding: 4rem 1rem 8rem 1rem;
 
@@ -1372,25 +1372,54 @@ img {
   }
 
   .table {
-    display: grid;
-    grid-template-columns: repeat(9, 1fr);
+    --columns: 9;
 
     .header {
       padding: 0;
-      grid-column: span 9 / auto;
+      grid-column: span var(--columns) / auto;
       display: grid;
-      grid-template-columns: repeat(9, 1fr);
+      grid-template-columns: repeat(var(--columns), 1fr);
 
       div {
         background-color: var(--dark-blue);
         color: #fff;
+        padding: 1rem;
+        border-right: 1px solid #fff;
       }
     }
 
-    div {
-      padding: 1rem;
-      border-right: 1px solid #fff;
-      background-color: var(--light-grey);
+    .row {
+      display: grid;
+      grid-template-columns: repeat(var(--columns), 1fr);
+
+      .expanded__row {
+        background-color: var(--light-blue);
+        grid-column: span var(--columns) / auto;
+        border-bottom: 1px solid var(--mid-grey);
+        display: none;
+
+        > div {
+          padding: 1rem;
+          border-right: 1px solid #fff;
+        }
+      }
+
+      > div {
+        border-right: 1px solid #fff;
+        background-color: var(--light-grey);
+        padding: 1rem;
+
+        &.view {
+          position: relative;
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+
+          svg {
+            margin-right: 1rem;
+          }
+        }
+      }
     }
   }
 }
