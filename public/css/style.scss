@@ -1374,6 +1374,14 @@ img {
   .table {
     --columns: 10;
 
+    .filters.header {
+      div {
+        background-color: var(--light-blue);
+        height: 10rem;
+        overflow-y: auto;
+      }
+    }
+
     .header {
       padding: 0;
       grid-column: span var(--columns) / auto;

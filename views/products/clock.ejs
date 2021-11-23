@@ -42,6 +42,38 @@
         <p>(Recommended standard products are highlighted in blue)</p>
       </div>
       <div class="table">
+        <div class="filters header">
+          <div class="">
+
+          </div>
+          <div class="model">
+
+          </div>
+          <div class="features">
+
+          </div>
+          <div class="package">
+
+          </div>
+          <div class="frequency">
+
+          </div>
+          <div class="freq__stability">
+
+          </div>
+          <div class="temp__range">
+
+          </div>
+          <div class="output">
+
+          </div>
+          <div class="voltage">
+
+          </div>
+          <div class="">
+
+          </div>
+        </div>
         <div class="header">
           <div class="">
             Stock
@@ -139,22 +171,22 @@
         ${item.features.map(f => `<p>${f}</p>`).join('')}
       </div>
       <div class="package">
-        <p>${item.package}</p>
+        <p>${item.package}mm</p>
       </div>
       <div class="frequency">
-        <p>${item.freq_lower} - ${item.freq_upper}</p>
+        <p>${item.freq_lower} - ${item.freq_upper}MHz</p>
       </div>
       <div class="freq__stability">
-        <p>${item.freq_stability}</p>
+        <p>±${item.freq_stability}ppm</p>
       </div>
       <div class="temp__range">
-        <p>${item.temp_lower} to ${item.temp_upper}</p>
+        <p>${item.temp_lower} to ${item.temp_upper}°C</p>
       </div>
       <div class="output">
         <p>${item.output}</p>
       </div>
       <div class="voltage">
-        <p>${item.voltage}</p>
+        <p>${item.voltage}V</p>
       </div>
       <div class="image">
         <p>${item.image}</p>

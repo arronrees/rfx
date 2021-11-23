@@ -1,5 +1,6 @@
 const fs = require('fs');
 const csvParser = require('csv-parser');
+const ClockOscillator = require('../models/clockOscillator');
 
 let quartzCrystals = [];
 let clockOscillators = [];
@@ -7,44 +8,55 @@ let VCXO = [];
 let TCXO = [];
 let OCXO = [];
 
-function parseCSV(filepath, dataArray) {
+function parseCSV(filepath, dataArray, callback) {
   fs.createReadStream(filepath)
     .pipe(csvParser())
     .on('data', (data) => dataArray.push(data))
     .on('end', () => {
       console.log(filepath, '--- csv parse complete');
+      callback();
     });
 }
 
-parseCSV('./upload_csv/clock-oscillators.csv', clockOscillators);
-parseCSV('./upload_csv/clock-oscillators.csv', quartzCrystals);
+// run function once then every 12 hours
+parseCSV(
+  './upload_csv/clock-oscillators.csv',
+  clockOscillators,
+  saveClockOscillators
+);
+
+// setInterval(() => {
+//   parseCSV('./upload_csv/clock-oscillators.csv', clockOscillators);
+//   parseCSV('./upload_csv/clock-oscillators.csv', quartzCrystals);
+// }, 1000 * 60 * 60 * 12);
+
+// after csv parsed, save products to db
+async function saveClockOscillators() {
+  await ClockOscillator.destroy({ truncate: true });
+  console.log('DB ClockOscillators cleared');
+
+  await ClockOscillator.bulkCreate(clockOscillators);
+}
 
 module.exports.getQuartzCrystals = async (req, res) => {
-  const data = [];
+  const clocks = await ClockOscillator.findAll({});
 
-  quartzCrystals.forEach((item, i) => {
-    let t = {
-      ...item,
-      features: item.features.split(';'),
-    };
-
-    data.push(t);
-  });
-
-  res.json(data);
+  res.json(clocks);
 };
 
 module.exports.getClockOscillators = async (req, res) => {
-  const data = [];
+  const data = await ClockOscillator.findAll();
 
-  clockOscillators.forEach((item) => {
-    let t = {
-      ...item,
-      features: item.features.split(';'),
+  const tableData = [];
+
+  data.forEach((item) => {
+    let d = {
+      ...item.dataValues,
+      features: item.dataValues.features.split(';'),
     };
 
-    data.push(t);
+    tableData.push(d);
   });
 
-  res.json(data);
+  res.json(tableData);
 };

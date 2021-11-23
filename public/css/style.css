@@ -1393,6 +1393,12 @@ img {
   --columns: 10;
 }
 
+.table__block .table .filters.header div {
+  background-color: var(--light-blue);
+  height: 10rem;
+  overflow-y: auto;
+}
+
 .table__block .table .header {
   padding: 0;
   grid-column: span var(--columns)/auto;
