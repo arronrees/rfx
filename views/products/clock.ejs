@@ -42,7 +42,7 @@
         <p>(Recommended standard products are highlighted in blue)</p>
       </div>
       <div class="table">
-        <div class="filters header">
+        <div class="table__filters header">
           <div class="">
 
           </div>
@@ -141,82 +141,7 @@
     </section>
     <!-- --footer info -->
 
-    <script>
-      async function getTableData() {
-        const res = await fetch('http://localhost:7000/api/clock-oscillators', {
-          mode: 'cors',
-        });
-
-        const data = await res.json();
-
-        const table = document.querySelector('.table__block .table');
-
-        table.inner = '';
-
-        data.forEach((item) => {
-          let row = `
-    <div class="row">
-      <div class="view">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-          class="bi bi-chevron-down" viewBox="0 0 16 16">
-          <path fill-rule="evenodd"
-            d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-        </svg>
-        <p>View</p>
-      </div>
-      <div class="model">
-        <p>${item.model}</p>
-      </div>
-      <div class="features">
-        ${item.features.map(f => `<p>${f}</p>`).join('')}
-      </div>
-      <div class="package">
-        <p>${item.package}mm</p>
-      </div>
-      <div class="frequency">
-        <p>${item.freq_lower} - ${item.freq_upper}MHz</p>
-      </div>
-      <div class="freq__stability">
-        <p>±${item.freq_stability}ppm</p>
-      </div>
-      <div class="temp__range">
-        <p>${item.temp_lower} to ${item.temp_upper}°C</p>
-      </div>
-      <div class="output">
-        <p>${item.output}</p>
-      </div>
-      <div class="voltage">
-        <p>${item.voltage}V</p>
-      </div>
-      <div class="image">
-        <p>${item.image}</p>
-      </div>
-      <section class="expanded__row">
-        <div>
-          ${item.Load}
-        </div>
-      </section>
-    </div>
-`;
-          table.innerHTML += row;
-        });
-
-        const views = document.querySelectorAll('.table__block .row .view');
-        const expands = document.querySelectorAll('.table__block .expanded__row');
-
-        views.forEach((view, i) => {
-          view.addEventListener('click', () => {
-            if (expands[i].style.display === 'block') {
-              expands[i].style.display = 'none';
-            } else {
-              expands[i].style.display = 'block';
-            }
-          });
-        });
-      }
-
-      getTableData();
-    </script>
+    <script src="/js/clock-table.js"></script>
 
   </main>
 

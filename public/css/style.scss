@@ -1374,7 +1374,7 @@ img {
   .table {
     --columns: 10;
 
-    .filters.header {
+    .table__filters {
       div {
         background-color: var(--light-blue);
         height: 10rem;

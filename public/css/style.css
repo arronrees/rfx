@@ -1393,7 +1393,7 @@ img {
   --columns: 10;
 }
 
-.table__block .table .filters.header div {
+.table__block .table .table__filters div {
   background-color: var(--light-blue);
   height: 10rem;
   overflow-y: auto;
