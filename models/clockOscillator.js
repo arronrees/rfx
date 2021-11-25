@@ -38,7 +38,7 @@ const ClockOscillator = db.define('ClockOscillator', {
     type: DataTypes.STRING,
   },
   voltage: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
   },
   image: {
     type: DataTypes.STRING(1024),

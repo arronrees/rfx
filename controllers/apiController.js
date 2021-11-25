@@ -1,6 +1,7 @@
 const fs = require('fs');
 const csvParser = require('csv-parser');
 const ClockOscillator = require('../models/clockOscillator');
+const { v4 } = require('uuid');
 
 let quartzCrystals = [];
 let clockOscillators = [];
@@ -44,15 +45,19 @@ module.exports.getQuartzCrystals = async (req, res) => {
   res.json(clocks);
 };
 
+// clock oscillators
 module.exports.getClockOscillators = async (req, res) => {
   const data = await ClockOscillator.findAll();
 
   const tableData = [];
 
-  data.forEach((item) => {
+  clockOscillators.forEach((item) => {
     let d = {
-      ...item.dataValues,
-      features: item.dataValues.features.split(';'),
+      ...item,
+      features: item.features.split(';'),
+      voltage: item.voltage.split(';'),
+      temp_range: `${item.temp_lower} - ${item.temp_upper}`,
+      id: v4(),
     };
 
     tableData.push(d);
