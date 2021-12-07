@@ -1,13 +1,12 @@
 const fs = require('fs');
 const csvParser = require('csv-parser');
-const ClockOscillator = require('../models/clockOscillator');
 const { v4 } = require('uuid');
+const ClockOscillator = require('../models/clockOscillator');
+const CrystalModel = require('../models/CrystalModel');
+const CrystalModelFeature = require('../models/crystalModelFeatures');
 
-let quartzCrystals = [];
+let quartzCrystalModels = [];
 let clockOscillators = [];
-let VCXO = [];
-let TCXO = [];
-let OCXO = [];
 
 function parseCSV(filepath, dataArray, callback) {
   fs.createReadStream(filepath)
@@ -26,6 +25,12 @@ parseCSV(
   saveClockOscillators
 );
 
+parseCSV(
+  './upload_csv/quartz-crystals.csv',
+  quartzCrystalModels,
+  saveCrystalModels
+);
+
 // setInterval(() => {
 //   parseCSV('./upload_csv/clock-oscillators.csv', clockOscillators);
 //   parseCSV('./upload_csv/clock-oscillators.csv', quartzCrystals);
@@ -38,16 +43,59 @@ async function saveClockOscillators() {
 
   await ClockOscillator.bulkCreate(clockOscillators);
 }
+async function saveCrystalModels() {
+  await CrystalModel.destroy({ truncate: true });
+  await CrystalModelFeature.destroy({ truncate: true });
+  console.log('DB CrystalModels cleared');
 
+  let features = [];
+
+  quartzCrystalModels.forEach((model, i) => {
+    let f = model.features.split(';');
+
+    f.forEach((feat) => {
+      features.push(feat);
+    });
+  });
+
+  let fs = [...new Set(features)];
+
+  let feats = [];
+
+  fs.forEach((f) => {
+    let s = {
+      feature: f,
+    };
+
+    feats.push(s);
+  });
+
+  await CrystalModel.bulkCreate(quartzCrystalModels);
+  await CrystalModelFeature.bulkCreate(feats);
+}
+
+// quartz crystals
 module.exports.getQuartzCrystals = async (req, res) => {
-  const clocks = await ClockOscillator.findAll({});
+  const crystals = await CrystalModel.findAll({});
+  const features = await CrystalModelFeature.findAll({});
 
-  res.json(clocks);
+  let tableData = [];
+
+  crystals.forEach((item) => {
+    let c = {
+      ...item.dataValues,
+      features: item.dataValues.features.split(';'),
+    };
+
+    tableData.push(c);
+  });
+
+  res.json({ tableData, features });
 };
 
 // clock oscillators
 module.exports.getClockOscillators = async (req, res) => {
-  const data = await ClockOscillator.findAll();
+  // const data = await ClockOscillator.findAll();
 
   const tableData = [];
   const feats = [];
