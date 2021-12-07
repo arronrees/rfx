@@ -27,13 +27,15 @@
       </div>
       <nav class="navbar">
         <ul class="nav__menu">
-          <% template.nav.forEach(item=> { %>
-            <li class="nav__item">
-              <a href="/<%=item.URL%>">
-                <%=item.Title%>
-              </a>
-            </li>
-            <% }) %>
+          <% if(template) { %>
+            <% template.nav.forEach(item=> { %>
+              <li class="nav__item">
+                <a href="/<%=item.URL%>">
+                  <%=item.Title%>
+                </a>
+              </li>
+              <% }) %>
+                <% } %>
         </ul>
         <div class="search">
           What Are you Looking for?

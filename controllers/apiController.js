@@ -50,18 +50,32 @@ module.exports.getClockOscillators = async (req, res) => {
   const data = await ClockOscillator.findAll();
 
   const tableData = [];
+  const feats = [];
+  const volts = [];
 
   clockOscillators.forEach((item) => {
     let d = {
       ...item,
       features: item.features.split(';'),
-      voltage: item.voltage.split(';'),
-      temp_range: `${item.temp_lower} - ${item.temp_upper}`,
+      // voltage: item.voltage.split(';'),
       id: v4(),
+      temp: {
+        temp_range: `${item.temp_lower} - ${item.temp_upper}`,
+        lower: item.temp_lower,
+        upper: item.temp_upper,
+      },
+      frequency: {
+        freq_range: `${item.freq_lower} - ${item.freq_upper}`,
+        upper: item.freq_upper,
+        lower: item.freq_lower,
+      },
     };
+
+    item.features.split(';').forEach((feat) => feats.push(feat));
+    item.voltage.split(';').forEach((volt) => volts.push(volt));
 
     tableData.push(d);
   });
 
-  res.json(tableData);
+  res.json({ tableData, feats, volts });
 };
