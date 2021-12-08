@@ -4,8 +4,10 @@ const { v4 } = require('uuid');
 const ClockOscillator = require('../models/clockOscillator');
 const CrystalModel = require('../models/CrystalModel');
 const CrystalModelFeature = require('../models/crystalModelFeatures');
+const CrystalPart = require('../models/crystalPart');
 
 let quartzCrystalModels = [];
+let quartzCrystalParts = [];
 let clockOscillators = [];
 
 function parseCSV(filepath, dataArray, callback) {
@@ -29,6 +31,12 @@ parseCSV(
   './upload_csv/quartz-crystals.csv',
   quartzCrystalModels,
   saveCrystalModels
+);
+
+parseCSV(
+  './upload_csv/crystals-parts.csv',
+  quartzCrystalParts,
+  saveCrystalParts
 );
 
 // setInterval(() => {
@@ -73,13 +81,20 @@ async function saveCrystalModels() {
   await CrystalModel.bulkCreate(quartzCrystalModels);
   await CrystalModelFeature.bulkCreate(feats);
 }
+async function saveCrystalParts() {
+  await CrystalPart.destroy({ truncate: true });
+  console.log('DB CrystalModelParts cleared');
+
+  await CrystalPart.bulkCreate(quartzCrystalParts);
+}
 
 // quartz crystals
 module.exports.getQuartzCrystals = async (req, res) => {
   const crystals = await CrystalModel.findAll({});
   const features = await CrystalModelFeature.findAll({});
+  const crystalParts = await CrystalPart.findAll({});
 
-  let tableData = [];
+  let data = [];
 
   crystals.forEach((item) => {
     let c = {
@@ -87,7 +102,24 @@ module.exports.getQuartzCrystals = async (req, res) => {
       features: item.dataValues.features.split(';'),
     };
 
-    tableData.push(c);
+    data.push(c);
+  });
+
+  let tableData = [];
+
+  data.forEach((item) => {
+    let m = {
+      ...item,
+      parts: [],
+    };
+
+    crystalParts.forEach((part) => {
+      if (part.model === item.model) {
+        m.parts.push(part);
+      }
+    });
+
+    tableData.push(m);
   });
 
   res.json({ tableData, features });

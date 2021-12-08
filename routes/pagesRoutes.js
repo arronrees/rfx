@@ -14,4 +14,6 @@ router.get(
   catchAsync(pagesController.getClockOscillators)
 );
 
+router.get('/quartz-crystals', catchAsync(pagesController.getQuartzCrystals));
+
 module.exports = router;
