@@ -4,6 +4,7 @@ const { v4 } = require('uuid');
 const ClockOscillator = require('../models/clockOscillator');
 const CrystalModel = require('../models/CrystalModel');
 const CrystalModelFeature = require('../models/crystalModelFeatures');
+const CrystalModelHeight = require('../models/crystalModelHeight');
 const CrystalPart = require('../models/crystalPart');
 
 let quartzCrystalModels = [];
@@ -54,15 +55,23 @@ async function saveClockOscillators() {
 async function saveCrystalModels() {
   await CrystalModel.destroy({ truncate: true });
   await CrystalModelFeature.destroy({ truncate: true });
+  await CrystalModelHeight.destroy({ truncate: true });
   console.log('DB CrystalModels cleared');
 
   let features = [];
+  let heights = [];
 
   quartzCrystalModels.forEach((model, i) => {
     let f = model.features.split(';');
 
     f.forEach((feat) => {
       features.push(feat);
+    });
+
+    let h = model.height.split(';');
+
+    h.forEach((hi) => {
+      heights.push(hi);
     });
   });
 
@@ -78,8 +87,21 @@ async function saveCrystalModels() {
     feats.push(s);
   });
 
+  let hs = [...new Set(heights)];
+
+  let hts = [];
+
+  hs.forEach((h) => {
+    let s = {
+      height: h,
+    };
+
+    hts.push(s);
+  });
+
   await CrystalModel.bulkCreate(quartzCrystalModels);
   await CrystalModelFeature.bulkCreate(feats);
+  await CrystalModelHeight.bulkCreate(hts);
 }
 async function saveCrystalParts() {
   await CrystalPart.destroy({ truncate: true });
@@ -92,6 +114,7 @@ async function saveCrystalParts() {
 module.exports.getQuartzCrystals = async (req, res) => {
   const crystals = await CrystalModel.findAll({});
   const features = await CrystalModelFeature.findAll({});
+  const heights = await CrystalModelHeight.findAll({});
   const crystalParts = await CrystalPart.findAll({});
 
   let data = [];
@@ -100,6 +123,7 @@ module.exports.getQuartzCrystals = async (req, res) => {
     let c = {
       ...item.dataValues,
       features: item.dataValues.features.split(';'),
+      height: item.dataValues.height.split(';'),
     };
 
     data.push(c);
@@ -122,7 +146,7 @@ module.exports.getQuartzCrystals = async (req, res) => {
     tableData.push(m);
   });
 
-  res.json({ tableData, features });
+  res.json({ tableData, features, heights });
 };
 
 // clock oscillators
