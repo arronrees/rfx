@@ -70,5 +70,5 @@ module.exports.getClockOscillators = async (req, res) => {
 
 // quartz crystals
 module.exports.getQuartzCrystals = async (req, res) => {
-  res.render('products/clock.ejs');
+  res.render('products/quartz.ejs');
 };

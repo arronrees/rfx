@@ -61,6 +61,8 @@ async function saveCrystalModels() {
   let features = [];
   let heights = [];
 
+  let qcs = [];
+
   quartzCrystalModels.forEach((model, i) => {
     let f = model.features.split(';');
 
@@ -73,6 +75,12 @@ async function saveCrystalModels() {
     h.forEach((hi) => {
       heights.push(hi);
     });
+
+    let temp_range = `${model.temp_lower} to ${model.temp_upper}`;
+
+    let qc = { ...model, temp_range };
+
+    qcs.push(qc);
   });
 
   let fs = [...new Set(features)];
@@ -99,7 +107,7 @@ async function saveCrystalModels() {
     hts.push(s);
   });
 
-  await CrystalModel.bulkCreate(quartzCrystalModels);
+  await CrystalModel.bulkCreate(qcs);
   await CrystalModelFeature.bulkCreate(feats);
   await CrystalModelHeight.bulkCreate(hts);
 }

@@ -1,0 +1,90 @@
+<%- include('../partials/header'); -%>
+
+  <main>
+
+    <!-- table -->
+    <section class="table__block">
+      <div class="table__header">
+        <div class="col1">
+          <div class="filtering">
+            <select class="filter" name="filter" id="filter">
+              <option value="">Filter</option>
+              <option value="test">Test</option>
+              <option value="test">Test</option>
+            </select>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-chevron-down" viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+            </svg>
+          </div>
+          <div class="reset">
+            Reset Filter
+          </div>
+          <div class="quote">
+            Request Quote
+          </div>
+        </div>
+        <div class="col2">
+          <div class="parts">
+            <label for="standard">
+              Standard Parts
+              <input type="radio" name="parts" id="standard">
+            </label>
+            <label for="all">
+              All Parts
+              <input type="radio" name="parts" id="all" checked>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="table__info">
+        <p>(Recommended standard products are highlighted in blue)</p>
+      </div>
+      <section id="insertTable">
+
+      </section>
+    </section>
+    <!-- --table -->
+    <!-- account cta -->
+    <section class="account__cta">
+      <div class="img">
+        <figure>
+          <img src="./img/other.jpg" alt="#">
+        </figure>
+      </div>
+      <div class="content">
+        <h3>Create an account</h3>
+        <p>View live stock levels, bookmark spec sheets and quickly access to recently viewed items.</p>
+        <div class="btns">
+          <a href="#" class="btn">Sign Up</a>
+          <a href="#" class="btn">My Account</a>
+        </div>
+      </div>
+    </section>
+    <!-- --account cta -->
+    <!-- footer info -->
+    <section class="info__block">
+      <div class="overlay"></div>
+      <div class="content">
+        <h4>Experienced Lapping and <span>Polishing services</span></h4>
+        <p>Precision lapping and polishing of materials including quartz,metals and alloys, correction of alumina
+          plates, aluminium oxide and silicon carbide.</p>
+        <div class="btns">
+          <a href="#" class="btn">Lapping</a>
+          <a href="#" class="btn">Polishing</a>
+        </div>
+      </div>
+    </section>
+    <!-- --footer info -->
+
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script src="/js/quartz.js"></script>
+
+  </main>
+
+  <%- include('../partials/footer'); -%>

@@ -1371,9 +1371,23 @@ img {
     }
   }
 
-  .table {
-    --columns: 10;
+  &.crystals {
+    .table {
+      .header {
+        grid-template-columns: repeat(17, 1fr);
+      }
 
+      .row {
+        grid-template-columns: repeat(17, 1fr);
+
+        .expanded__row {
+          grid-column: span 17 / auto;
+        }
+      }
+    }
+  }
+
+  .table {
     .table__filters {
       div {
         background-color: var(--light-blue);
@@ -1384,28 +1398,40 @@ img {
 
     .header {
       padding: 0;
-      grid-column: span var(--columns) / auto;
+      grid-column: span 10 / auto;
       display: grid;
-      grid-template-columns: repeat(var(--columns), 1fr);
+      grid-template-columns: repeat(10, 1fr);
 
       div {
         background-color: var(--dark-blue);
         color: #fff;
         padding: 1rem;
         border-right: 1px solid #fff;
+        max-height: 12rem;
+        border-bottom: 1px solid white;
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        input {
+          border: 1px solid white;
+        }
+
+        button {
+          border: 1px solid white;
+        }
       }
     }
 
     .row {
       display: grid;
-      grid-template-columns: repeat(var(--columns), 1fr);
+      grid-template-columns: repeat(10, 1fr);
       font-size: 0.8rem;
       text-align: center;
       border-bottom: 1px solid #fff;
 
       .expanded__row {
         background-color: var(--light-blue);
-        grid-column: span var(--columns) / auto;
+        grid-column: span 10 / auto;
         display: none;
 
         > div {

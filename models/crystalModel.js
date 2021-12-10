@@ -52,6 +52,9 @@ const CrystalModel = db.define('CrystalModel', {
   temp_upper: {
     type: DataTypes.INTEGER,
   },
+  temp_range: {
+    type: DataTypes.STRING,
+  },
   freq_stability: {
     type: DataTypes.INTEGER,
   },

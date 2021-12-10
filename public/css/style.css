@@ -1389,8 +1389,18 @@ img {
   width: max-content;
 }
 
-.table__block .table {
-  --columns: 10;
+.table__block.crystals .table .header {
+  -ms-grid-columns: (1fr)[17];
+      grid-template-columns: repeat(17, 1fr);
+}
+
+.table__block.crystals .table .row {
+  -ms-grid-columns: (1fr)[17];
+      grid-template-columns: repeat(17, 1fr);
+}
+
+.table__block.crystals .table .row .expanded__row {
+  grid-column: span 17 / auto;
 }
 
 .table__block .table .table__filters div {
@@ -1401,11 +1411,11 @@ img {
 
 .table__block .table .header {
   padding: 0;
-  grid-column: span var(--columns)/auto;
+  grid-column: span 10 / auto;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (1fr)[var];
-      grid-template-columns: repeat(var(--columns), 1fr);
+  -ms-grid-columns: (1fr)[10];
+      grid-template-columns: repeat(10, 1fr);
 }
 
 .table__block .table .header div {
@@ -1413,13 +1423,25 @@ img {
   color: #fff;
   padding: 1rem;
   border-right: 1px solid #fff;
+  max-height: 12rem;
+  border-bottom: 1px solid white;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.table__block .table .header div input {
+  border: 1px solid white;
+}
+
+.table__block .table .header div button {
+  border: 1px solid white;
 }
 
 .table__block .table .row {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (1fr)[var];
-      grid-template-columns: repeat(var(--columns), 1fr);
+  -ms-grid-columns: (1fr)[10];
+      grid-template-columns: repeat(10, 1fr);
   font-size: 0.8rem;
   text-align: center;
   border-bottom: 1px solid #fff;
@@ -1427,7 +1449,7 @@ img {
 
 .table__block .table .row .expanded__row {
   background-color: var(--light-blue);
-  grid-column: span var(--columns)/auto;
+  grid-column: span 10 / auto;
   display: none;
 }
 
