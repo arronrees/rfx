@@ -77,8 +77,10 @@ async function saveCrystalModels() {
     });
 
     let temp_range = `${model.temp_lower} to ${model.temp_upper}`;
+    let lower_range = `${model.lower_lower_turn_point} to ${model.lower_upper_turn_point}`;
+    let upper_range = `${model.upper_lower_turn_point} to ${model.upper_upper_turn_point}`;
 
-    let qc = { ...model, temp_range };
+    let qc = { ...model, temp_range, lower_range, upper_range };
 
     qcs.push(qc);
   });

@@ -17,13 +17,13 @@ const CrystalPart = db.define('CrystalPart', {
     type: DataTypes.INTEGER,
   },
   frequency: {
-    type: DataTypes.DECIMAL,
+    type: DataTypes.FLOAT,
   },
   holder: {
     type: DataTypes.STRING,
   },
   height: {
-    type: DataTypes.DECIMAL,
+    type: DataTypes.FLOAT,
   },
   cut: {
     type: DataTypes.STRING,
@@ -38,12 +38,12 @@ const CrystalPart = db.define('CrystalPart', {
     type: DataTypes.INTEGER,
   },
   c1: {
-    type: DataTypes.DECIMAL,
+    type: DataTypes.FLOAT,
   },
   c0: {
-    type: DataTypes.DECIMAL,
+    type: DataTypes.FLOAT,
   },
-  q: {
+  q_factor: {
     type: DataTypes.INTEGER,
   },
   freq_tol: {
@@ -61,10 +61,22 @@ const CrystalPart = db.define('CrystalPart', {
   freq_stability: {
     type: DataTypes.INTEGER,
   },
-  lower_turn_point: {
+  lower_lower_turn_point: {
+    type: DataTypes.INTEGER,
+  },
+  lower_upper_turn_point: {
+    type: DataTypes.INTEGER,
+  },
+  upper_lower_turn_point: {
+    type: DataTypes.INTEGER,
+  },
+  upper_upper_turn_point: {
+    type: DataTypes.INTEGER,
+  },
+  upper_range: {
     type: DataTypes.STRING,
   },
-  upper_turn_point: {
+  lower_range: {
     type: DataTypes.STRING,
   },
   mounting: {

@@ -11,7 +11,7 @@ const CrystalModel = db.define('CrystalModel', {
     type: DataTypes.STRING,
   },
   features: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
   },
   holder: {
     type: DataTypes.STRING,
@@ -58,10 +58,22 @@ const CrystalModel = db.define('CrystalModel', {
   freq_stability: {
     type: DataTypes.INTEGER,
   },
-  lower_turn_point: {
+  lower_lower_turn_point: {
+    type: DataTypes.INTEGER,
+  },
+  lower_upper_turn_point: {
+    type: DataTypes.INTEGER,
+  },
+  upper_lower_turn_point: {
+    type: DataTypes.INTEGER,
+  },
+  upper_upper_turn_point: {
+    type: DataTypes.INTEGER,
+  },
+  upper_range: {
     type: DataTypes.STRING,
   },
-  upper_turn_point: {
+  lower_range: {
     type: DataTypes.STRING,
   },
   mounting: {
