@@ -58,6 +58,9 @@ const CrystalPart = db.define('CrystalPart', {
   temp_upper: {
     type: DataTypes.INTEGER,
   },
+  temp_range: {
+    type: DataTypes.INTEGER,
+  },
   freq_stability: {
     type: DataTypes.INTEGER,
   },

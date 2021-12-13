@@ -117,7 +117,19 @@ async function saveCrystalParts() {
   await CrystalPart.destroy({ truncate: true });
   console.log('DB CrystalModelParts cleared');
 
-  await CrystalPart.bulkCreate(quartzCrystalParts);
+  let qcps = [];
+
+  quartzCrystalParts.forEach((part, i) => {
+    let temp_range = `${part.temp_lower} to ${part.temp_upper}`;
+    let lower_range = `${part.lower_lower_turn_point} to ${part.lower_upper_turn_point}`;
+    let upper_range = `${part.upper_lower_turn_point} to ${part.upper_upper_turn_point}`;
+
+    let qcp = { ...part, temp_range, lower_range, upper_range };
+
+    qcps.push(qcp);
+  });
+
+  await CrystalPart.bulkCreate(qcps);
 }
 
 // quartz crystals
