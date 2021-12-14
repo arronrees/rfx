@@ -1409,6 +1409,22 @@ img {
   overflow-y: auto;
 }
 
+.table__block .table .row .expanded__row .part__row {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[15];
+      grid-template-columns: repeat(15, 1fr);
+  padding: 1rem;
+}
+
+.table__block .table .row .expanded__row .part__header {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[15];
+      grid-template-columns: repeat(15, 1fr);
+  color: #fff;
+}
+
 .table__block .table .header {
   padding: 0;
   grid-column: span 10 / auto;

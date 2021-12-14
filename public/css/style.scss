@@ -1396,6 +1396,18 @@ img {
       }
     }
 
+    .row .expanded__row .part__row {
+      display: grid;
+      grid-template-columns: repeat(15, 1fr);
+      padding: 1rem;
+    }
+
+    .row .expanded__row .part__header {
+      display: grid;
+      grid-template-columns: repeat(15, 1fr);
+      color: #fff;
+    }
+
     .header {
       padding: 0;
       grid-column: span 10 / auto;
